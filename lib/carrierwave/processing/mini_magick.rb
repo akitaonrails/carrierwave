@@ -300,7 +300,7 @@ module CarrierWave
         image.format(@format.to_s.downcase) if @format
         image = yield(image)
         image.write(current_path)
-        image.run_command("identify", current_path)
+        image.run_command("identify -limit memory 0 -limit map 0", current_path)
       ensure
         image.destroy!
       end
